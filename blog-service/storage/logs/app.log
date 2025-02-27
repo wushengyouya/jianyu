@@ -1,0 +1,6 @@
+2025/02/27 10:45:49 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740624349790076700}
+2025/02/27 10:50:08 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740624608850178600}
+2025/02/27 10:50:13 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740624613675702500}
+2025/02/27 11:20:04 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740626404178499500}
+2025/02/27 11:24:31 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740626671199553700}
+2025/02/27 11:57:23 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740628643224196100}
