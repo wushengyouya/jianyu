@@ -29,6 +29,12 @@ func init() {
 
 }
 
+// @title 博客系统
+// @version 1.0
+// @description Go实现的一个简单的博客项目,参考Go 语言编程之旅
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+// @termOfService https://github.com/go-programming-tour-book
 func main() {
 	engine := routers.NewRouters()
 	// engine.Run()
