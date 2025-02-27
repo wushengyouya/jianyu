@@ -5,6 +5,7 @@ import (
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "github.com/wushengyouya/blog-service/docs"
+	"github.com/wushengyouya/blog-service/internal/middleware"
 	v1 "github.com/wushengyouya/blog-service/internal/routers/api/v1"
 )
 
@@ -17,6 +18,7 @@ func NewRouters() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.Use(middleware.Translations())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	// 创建路由组
 	apiv1 := r.Group("/api/v1")
