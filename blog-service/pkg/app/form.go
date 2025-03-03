@@ -31,9 +31,9 @@ func (v ValidErrors) Errors() []string {
 	return errs
 }
 
-func BindAndValid(c *gin.Context, v any) (bool, ValidErrors) {
+func BindAndValid(c *gin.Context, ptr any) (bool, ValidErrors) {
 	var errs ValidErrors
-	err := c.ShouldBind(v)
+	err := c.ShouldBind(ptr)
 	if err != nil {
 		v := c.Value("trans")
 		trans, _ := v.(ut.Translator)

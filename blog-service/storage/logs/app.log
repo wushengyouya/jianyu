@@ -22,3 +22,4 @@
 2025/02/27 18:40:19 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1740652819814126800}
 2025/02/27 18:40:24 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1740652824162341300}
 2025/02/27 18:52:22 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1740653542882488500}
+2025/03/03 18:35:19 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1740998119867584400}
