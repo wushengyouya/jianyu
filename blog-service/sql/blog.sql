@@ -1,3 +1,4 @@
+-- Active: 1712051663122@@127.0.0.1@3306@blog_service
 
 -- 创建数据库
 CREATE DATABASE
@@ -35,14 +36,14 @@ CREATE Table `blog_article`(
     `deleted_on` int(10) unsigned DEFAULT '0' COMMENT '删除时间',
     `is_del` tinyint(3) unsigned DEFAULT '0' COMMENT '是否删除 0 为未删除、1 为已删除',
     -- 公共字段
-    `state` TINYINT(3) UNSIGNED DECIMAL '1' COMMENT '状态 0 为禁用、1 为启用',
+    `state` TINYINT(3) UNSIGNED DEFAULT '1' COMMENT '状态 0 为禁用、1 为启用',
     PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章管理';
 
 -- 文章标签关联表
 CREATE Table `blog_acticle_tag`(
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `article_id` INT(11) NOT NULL COMMENT `文章 ID`,
+    `article_id` INT(11) NOT NULL COMMENT '文章 ID',
     `tag_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '标签 ID',
      -- 公共字段
     `created_on` int(10) unsigned DEFAULT '0' COMMENT '创建时间',

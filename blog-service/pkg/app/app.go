@@ -48,3 +48,8 @@ func (r *Response) ToErrorResponse(err *errcode.Error) {
 	}
 	r.Ctx.JSON(err.StatusCode(), response)
 }
+
+func (r *Response) ToSuccessResponse(msg any) {
+	response := gin.H{"success": "ok", "msg": msg}
+	r.Ctx.JSON(http.StatusOK, response)
+}

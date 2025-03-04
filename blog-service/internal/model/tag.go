@@ -1,6 +1,8 @@
 package model
 
 import (
+	"time"
+
 	"github.com/wushengyouya/blog-service/pkg/app"
 	"gorm.io/gorm"
 )
@@ -46,8 +48,12 @@ func (t Tag) Update(db *gorm.DB) error {
 	return db.Model(&t).Where("id = ? AND is_del = ?", t.ID, 0).Updates(t).Error
 }
 
+// TODO:手动软删除，后续更新到回调软删除
 func (t Tag) Delele(db *gorm.DB) error {
-	return db.Where("id = ? AND is_del = ?", t.Model.ID, 0).Delete(&t).Error
+	db = db.Where("id = ? AND is_del = ?", t.Model.ID, 0).Find(&t)
+	t.IsDel = 1
+	t.DeletedOn = uint32(time.Now().Unix())
+	return db.Updates(&t).Error
 }
 func (t Tag) TableName() string {
 	return "blog_tag"

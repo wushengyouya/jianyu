@@ -18,7 +18,7 @@ type CreateArticleRequest struct {
 	Desc          string `form:"desc" binding:"required,min=2,max=255"`
 	Content       string `form:"content" binding:"required,min=2,max=4294967295"`
 	CoverImageUrl string `form:"cover_image_url" binding:"required,url"`
-	CreateBy      string `form:"created_by" binding:"required,min=2,max=100"`
+	CreatedBy     string `form:"created_by" binding:"required,min=2,max=100"`
 	State         uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
 
@@ -29,7 +29,7 @@ type UpdateArticleRequest struct {
 	Desc          string `form:"desc" binding:"min=2,max=255"`
 	Content       string `form:"content" binding:"min=2,max=4294967295"`
 	CoverImageUrl string `form:"cover_image_url" binding:"url"`
-	CreateBy      string `form:"created_by" binding:"min=2,max=100"`
+	CreatedBy     string `form:"created_by" binding:"min=2,max=100"`
 	State         uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
 

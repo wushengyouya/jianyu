@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/wushengyouya/blog-service/global"
@@ -16,7 +17,7 @@ type Model struct {
 	CreatedBy  string `json:"created_by"`
 	ModifiedBy string `json:"modified_by"`
 	CreatedOn  uint32 `json:"created_on"`
-	ModifedOn  uint32 `json:"modified_on"`
+	ModifiedOn uint32 `json:"modified_on"`
 	DeletedOn  uint32 `json:"deleted_on"`
 	IsDel      uint8  `json:"is_del"`
 }
@@ -35,9 +36,9 @@ func NewDBEngine(databaseSetting *setting.DataBaseSettingS) (*gorm.DB, error) {
 		DSN: dsn,
 	}))
 	// 数据库操作后的回调函数
-	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallback)
-	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
-	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
+	db.Callback().Create().Before("gorm:create").Register("gorm:update_time_stamp", updateTimeStampForCreateCallback)
+	db.Callback().Update().Before("gorm:update").Register("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
+	db.Callback().Delete().Before("gorm:delete").Register("gorm:update_delete_status", deleteCallback)
 
 	if err != nil {
 		return nil, err
@@ -72,12 +73,19 @@ func updateTimeStampForCreateCallback(db *gorm.DB) {
 	// db.Statement.Schema 是一个模型字段的元数据集合，存储了当前操作涉及的数据库模型(即Go结构体)的所有字段的详细信息
 	createTimeField := db.Statement.Schema.LookUpField("CreatedOn")
 	if createTimeField != nil {
-		createTimeField.Set(db.Statement.Context, db.Statement.ReflectValue, nowTime)
+		err := createTimeField.Set(db.Statement.Context, db.Statement.ReflectValue, nowTime)
+		if err != nil {
+			log.Println(err)
+			global.Logger.Errorf("updateTimeStampForCreateCallback.createTimeField.Set err: %v", err)
+		}
 	}
 
 	modifyTimeField := db.Statement.Schema.LookUpField("ModifiedOn")
 	if modifyTimeField != nil {
-		modifyTimeField.Set(db.Statement.Context, db.Statement.ReflectValue, nowTime)
+		err := modifyTimeField.Set(db.Statement.Context, db.Statement.ReflectValue, nowTime)
+		if err != nil {
+			global.Logger.Errorf("updateTimeStampForCreateCallback.modifyTimeField.Set err: %v", err)
+		}
 	}
 
 }
@@ -99,21 +107,28 @@ func updateTimeStampForUpdateCallback(db *gorm.DB) {
 
 // 删除全局回调
 func deleteCallback(db *gorm.DB) {
-	var extraOption string
-	if str, ok := db.Statement.Get("gorm:delete_option"); ok {
-		extraOption = fmt.Sprint(str)
-	}
 	scheme := db.Statement.Schema
-	idOnField := scheme.LookUpField("ID")
+	// idOnField := scheme.LookUpField("ID")
 	deleteOnField := scheme.LookUpField("DeletedOn")
-	isDelField := scheme.LookUpField("IsDel")
-	if deleteOnField != nil && isDelField != nil {
-		now := time.Now().Unix()
-		condition := fmt.Sprintf("WHERE id = %v %v", idOnField.DBName, extraOption)
-		sql := fmt.Sprintf("UPDATE %v SET %v=%v,%v=%v %v", scheme.Table, deleteOnField.DBName, now, isDelField.DBName, 1, condition)
-		err := db.Statement.Raw(sql).Error
+	now := time.Now().Unix()
+	if deleteOnField != nil {
+		err := deleteOnField.Set(db.Statement.Context, db.Statement.ReflectValue, now)
 		if err != nil {
-			global.Logger.Errorf("deleteCallback.db.Statement.Raw errs: %v", err)
+			global.Logger.Errorf("deleteCallback.deleteOnField.Set errs: %v", err)
 		}
 	}
+	isDelField := scheme.LookUpField("IsDel")
+	if isDelField != nil {
+		err := isDelField.Set(db.Statement.Context, db.Statement.ReflectValue, 1)
+		if err != nil {
+			global.Logger.Errorf("deleteCallback.isDelField.Set errs: %v", err)
+		}
+	}
+	// 	condition := fmt.Sprintf("WHERE id = %v %v", idOnField.DBName, extraOption)
+	// 	sql := fmt.Sprintf("UPDATE %v SET %v=%v,%v=%v %v", scheme.Table, deleteOnField.DBName, now, isDelField.DBName, 1, condition)
+	// 	err := db.Statement.Raw(sql).Error
+	// 	if err != nil {
+	// 		global.Logger.Errorf("deleteCallback.db.Statement.Raw errs: %v", err)
+	// 	}
+	// }
 }
