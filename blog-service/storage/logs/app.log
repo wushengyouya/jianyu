@@ -131,3 +131,13 @@
 2025/03/04 17:58:40 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741082320748024600}
 2025/03/04 18:00:39 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741082439304072300}
 2025/03/04 18:10:52 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741083052631255100}
+2025/03/04 18:17:04 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741083424393537500}
+2025/03/05 11:30:39 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741145439366322800}
+2025/03/05 11:30:50 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741145450451629300}
+2025/03/05 11:42:15 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741146135009963200}
+2025/03/05 11:45:32 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741146332065498500}
+2025/03/05 15:10:01 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741158601333542400}
+2025/03/05 15:10:06 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741158606146686800}
+2025/03/05 15:10:09 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158609673297000}
+2025/03/05 15:13:45 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158825517945100}
+2025/03/05 15:14:45 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158885625514700}

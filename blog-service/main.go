@@ -73,6 +73,13 @@ func setupSetting() error {
 		return err
 	}
 
+	// 加载jwt配置
+	err = setting.ReadSection("JWT", &global.JWTSetting)
+	if err != nil {
+		return err
+	}
+	global.JWTSetting.Expire *= time.Second
+
 	// 设置超时
 	global.ServerSetting.ReadTimeout *= time.Second
 	global.ServerSetting.WriteTimeout *= time.Second
