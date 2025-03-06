@@ -74,3 +74,5 @@ CREATE TABLE `blog_auth`(
 
 INSERT INTO `blog_service`.`blog_auth`(`id`, `app_key`, `app_secret`, `created_on`, `created_by`, `modified_on`, `modified_by`, `deleted_on`, `is_del`) 
 VALUES (1, 'eddycjy', 'go-programming-tour-book', 0, 'eddycjy', 0, '', 0, 0);
+
+ SELECT * FROM `blog_auth` WHERE app_key = 'eddycjy' AND app_secret = 'go-programming-tour-book' AND is_del = 0 ORDER BY `blog_auth`.`id` LIMIT 1;

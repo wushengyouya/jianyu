@@ -2,6 +2,7 @@ package routers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
@@ -10,7 +11,16 @@ import (
 	"github.com/wushengyouya/blog-service/global"
 	"github.com/wushengyouya/blog-service/internal/middleware"
 	v1 "github.com/wushengyouya/blog-service/internal/routers/api/v1"
+	"github.com/wushengyouya/blog-service/pkg/limiter"
 )
+
+// 添加令牌桶
+var methodLimiters = limiter.NewMetHodLimiter().AddBuckets(limiter.LimiterBuckerRule{
+	Key:          "/auth",
+	FillInterval: time.Second,
+	Capacity:     10,
+	Quantum:      10,
+})
 
 func NewRouters() *gin.Engine {
 
@@ -19,9 +29,18 @@ func NewRouters() *gin.Engine {
 
 	// 初始化engine
 	r := gin.New()
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
-	// r.Use(middleware.JWT())
+
+	if global.ServerSetting.RunMode == "debug" {
+		gin.SetMode(gin.DebugMode)
+		r.Use(gin.Logger())
+		r.Use(gin.Recovery())
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+		r.Use(middleware.AccessLog())
+		r.Use(middleware.Recovery())
+	}
+	r.Use(middleware.RateLimiter(methodLimiters))
+	r.Use(middleware.ContextTimeOut(global.AppSetting.DefaultContextTimeOut))
 
 	// TODO:放在中间件每次请求注册会Panic,后续调整到init函数中只初始化一次
 	r.Use(middleware.Translations())
@@ -33,7 +52,7 @@ func NewRouters() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 	r.POST("/auth", v1.GetAuth)
 	// 创建路由组
-	apiv1 := r.Group("/api/v1")
+	apiv1 := r.Group("/api/v1", middleware.JWT())
 	{
 		// 标记路由
 		apiv1.POST("/tags", tag.Create)

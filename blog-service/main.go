@@ -78,6 +78,12 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+
+	// 加载邮件配置
+	err = setting.ReadSection("Email", &global.EmailSetting)
+	if err != nil {
+		return err
+	}
 	global.JWTSetting.Expire *= time.Second
 
 	// 设置超时

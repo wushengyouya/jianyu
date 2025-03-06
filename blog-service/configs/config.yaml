@@ -16,6 +16,7 @@ App:
     - .jpg
     - .jpeg
     - .png
+  DefaultContextTimeOut: 60
 Database:
   DBType: mysql
   Username: root  # 填写你的数据库账号
@@ -32,3 +33,13 @@ JWT:
   Secret: eddycjy
   Issuer: blog-service
   Expire: 7200
+
+Email:
+  Host: smtp.163.com
+  Port: 465
+  UserName: 15575564709@163.com
+  Password: PDFERLOFDZRLMVTK
+  IsSSL: true
+  From: 15575564709@163.com
+  To:
+    - 1009889421@qq.com

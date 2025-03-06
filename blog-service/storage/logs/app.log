@@ -141,3 +141,34 @@
 2025/03/05 15:10:09 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158609673297000}
 2025/03/05 15:13:45 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158825517945100}
 2025/03/05 15:14:45 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段","time":1741158885625514700}
+2025/03/05 15:14:51 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741158891259900500}
+2025/03/05 15:14:53 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppSecret为必填字段,AppKey为必填字段","time":1741158893311635600}
+2025/03/05 15:15:00 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppSecret为必填字段,AppKey为必填字段","time":1741158900354619000}
+2025/03/05 15:15:01 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741158901557422200}
+2025/03/05 15:15:14 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741158914944902400}
+2025/03/05 15:15:22 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741158922552795500}
+2025/03/06 10:31:20 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741228280825595900}
+2025/03/06 10:33:03 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741228383646048300}
+2025/03/06 10:34:31 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741228471460035900}
+2025/03/06 10:36:49 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741228609218086100}
+2025/03/06 10:52:33 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741229553386140700}
+2025/03/06 11:06:30 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741230390598118800}
+2025/03/06 11:06:47 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"error","message":"app.BindAndValid errs: AppKey为必填字段,AppSecret为必填字段","time":1741230407878920300}
+2025/03/06 17:32:40 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253560621366100}
+2025/03/06 17:33:04 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253584616472400}
+2025/03/06 17:33:31 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253611399632900}
+2025/03/06 17:34:43 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253683995279100}
+2025/03/06 17:34:55 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253695267106200}
+2025/03/06 17:35:04 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741253704853578900}
+2025/03/06 17:35:16 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741253716, end_time: 1741253716","time":1741253716815673300}
+2025/03/06 17:36:31 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741253791, end_time: 1741253791","time":1741253791762368400}
+2025/03/06 17:43:27 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741254196552862200}
+2025/03/06 17:43:43 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741254214, end_time: 1741254214","time":1741254223679143200}
+2025/03/06 17:43:49 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741254229146322400}
+2025/03/06 17:43:59 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741254239415227600}
+2025/03/06 17:44:33 {"callers":["d:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741254242, end_time: 1741254242","time":1741254252267463400}
+2025/03/06 18:06:52 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741255612542442700}
+2025/03/06 18:06:58 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741255618, end_time: 1741255618","time":1741255618375487900}
+2025/03/06 18:09:12 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"access log: method: POST, status_code: 200, begin_time: 1741255752, end_time: 1741255752","time":1741255752221342200}
+2025/03/06 18:09:16 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741255756663000300}
+2025/03/06 18:11:45 {"callers":["D:/mygo/jianyu/blog-service/main.go: 21 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1741255905165758400}
