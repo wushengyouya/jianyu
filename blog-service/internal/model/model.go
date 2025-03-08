@@ -51,7 +51,10 @@ func NewDBEngine(databaseSetting *setting.DataBaseSettingS) (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	// 能有效提高数据库性能
+	// 设置空闲连接池的最大连接数
 	sqldb.SetMaxIdleConns(databaseSetting.MaxIdleConns)
+	// 设置与数据库的最大连接
 	sqldb.SetMaxOpenConns(databaseSetting.MaxOpenConns)
 	return db, nil
 }

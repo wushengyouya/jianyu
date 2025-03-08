@@ -1,8 +1,14 @@
 package main
 
 import (
+	"context"
+	"flag"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"strings"
+	"syscall"
 	"time"
 
 	"github.com/wushengyouya/blog-service/global"
@@ -13,7 +19,14 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
+var (
+	port    string
+	runMode string
+	config  string
+)
+
 func init() {
+	setupFlag()
 	err := setupSetting()
 	if err != nil {
 		log.Fatalf("init.setting err: %v", err)
@@ -46,15 +59,35 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	global.Logger.Infof("%s: go-programming-tour-book/%s", "eddycjy", "blog-service")
-	server.ListenAndServe()
+
+	// 开启一个goroutine启动服务
+	go func() {
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			global.Logger.Errorf("server.ListenAndServe err: %v", err)
+		}
+
+	}()
+	// 等待信号来优雅的关闭服务器,为关闭服务器设置一个5秒操作
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit // 堵塞在此等待信号量，收到上面两种信号时才会往下执行
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	// 5秒内优雅的关闭服务(将未处理完的请求处理完再关闭服务)，超时过5秒就退出
+	if err := server.Shutdown(ctx); err != nil {
+		global.Logger.Errorf("Server Shutdown err: %v", err)
+		return
+	}
+	log.Println("Server exitting...")
 }
 
 // 加载配置文件
 func setupSetting() error {
-	setting, err := setting.NewSetting()
+	setting, err := setting.NewSetting(strings.Split(config, ",")...)
 	if err != nil {
 		return err
 	}
+
 	// 加载server配置
 	err = setting.ReadSection("Server", &global.ServerSetting)
 	if err != nil {
@@ -84,6 +117,12 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	if port != "" {
+		global.ServerSetting.HttpPort = port
+	}
+	if runMode != "" {
+		global.ServerSetting.RunMode = runMode
+	}
 	global.JWTSetting.Expire *= time.Second
 
 	// 设置超时
@@ -111,5 +150,13 @@ func setupLogger() error {
 		MaxAge:    10,
 		LocalTime: true,
 	}, "", log.LstdFlags).WithCaller(2)
+	return nil
+}
+
+func setupFlag() error {
+	flag.StringVar(&port, "port", "", "启动端口")
+	flag.StringVar(&runMode, "mode", "", "启动模式")
+	flag.StringVar(&config, "config", "configs/", "指定要使用的配置文件路径")
+	flag.Parse()
 	return nil
 }

@@ -11,18 +11,33 @@ type Setting struct {
 	vp *viper.Viper
 }
 
-func NewSetting() (*Setting, error) {
+func NewSetting(configs ...string) (*Setting, error) {
 	vp := viper.New()
 	vp.SetConfigName("config")
+	for _, config := range configs {
+		if config != "" {
+			vp.AddConfigPath(config)
+		}
+	}
 	vp.AddConfigPath("configs/")
 	vp.SetConfigType("yaml")
-	vp.WatchConfig()
-	vp.OnConfigChange(func(in fsnotify.Event) {
-		log.Println("config changed")
-	})
+
 	err := vp.ReadInConfig()
 	if err != nil {
 		return nil, err
 	}
-	return &Setting{vp: vp}, nil
+	s := &Setting{vp: vp}
+
+	return s, nil
+}
+
+func (s *Setting) WatchSettingChange() {
+	go func() {
+		s.vp.WatchConfig()
+		s.vp.OnConfigChange(func(in fsnotify.Event) {
+			log.Println("config changed, reload")
+			// 监测到配置文件发生变化，重新加载配置文件
+			_ = s.ReloadAllSection()
+		})
+	}()
 }

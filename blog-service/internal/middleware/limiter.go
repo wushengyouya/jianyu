@@ -13,6 +13,7 @@ func RateLimiter(l limiter.LimiterIface) gin.HandlerFunc {
 		key := l.Key(ctx)
 		if bucket, ok := l.GetBucket(key); ok {
 			count := bucket.TakeAvailable(1)
+			// 如果没取到令牌返回err
 			if count == 0 {
 				response := app.NewResponse(ctx)
 				response.ToErrorResponse(errcode.TooManyRequests)

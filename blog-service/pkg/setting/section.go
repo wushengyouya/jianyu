@@ -1,6 +1,8 @@
 package setting
 
-import "time"
+import (
+	"time"
+)
 
 type ServerSettingS struct {
 	RunMode      string
@@ -51,10 +53,27 @@ type EmailSettingS struct {
 	To       []string
 }
 
+var sections = make(map[string]any)
+
 func (s *Setting) ReadSection(k string, v any) error {
 	err := s.vp.UnmarshalKey(k, v)
 	if err != nil {
 		return err
+	}
+	// 缓存配置文件中的值
+	if _, ok := sections[k]; !ok {
+		sections[k] = v
+	}
+	return nil
+}
+
+// 热加载配置文件
+func (s *Setting) ReloadAllSection() error {
+	for k, v := range sections {
+		err := s.ReadSection(k, v)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
