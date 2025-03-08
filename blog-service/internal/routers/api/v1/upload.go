@@ -16,6 +16,8 @@ func NewUpload() Upload {
 	return Upload{}
 }
 
+// 单文件上传中间件
+// TODO:多文件上传
 func (u Upload) UploadFile(c *gin.Context) {
 	response := app.NewResponse(c)
 	file, fileHeader, err := c.Request.FormFile("file")

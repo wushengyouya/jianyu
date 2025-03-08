@@ -39,10 +39,12 @@ func NewRouters() *gin.Engine {
 		r.Use(middleware.AccessLog())
 		r.Use(middleware.Recovery())
 	}
+	// 限流桶
 	r.Use(middleware.RateLimiter(methodLimiters))
+	// 超时控制
 	r.Use(middleware.ContextTimeOut(global.AppSetting.DefaultContextTimeOut))
 
-	// TODO:放在中间件每次请求注册会Panic,后续调整到init函数中只初始化一次
+	// TODO:此处放在中间件,每次请求注册,请求多了会Panic,后续调整到init函数中只初始化一次
 	r.Use(middleware.Translations())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	// 上传文件
