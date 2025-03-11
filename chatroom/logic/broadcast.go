@@ -1,5 +1,11 @@
 package logic
 
+import (
+	"log"
+
+	"github.com/wushengyouya/chatroom/global"
+)
+
 type broadcaster struct {
 	// 所有聊天室用户
 	users map[string]*User
@@ -74,6 +80,14 @@ func (b *broadcaster) CanEnterRoom(nickname string) bool {
 }
 func (b *broadcaster) UserEntering(u *User) {
 	b.enteringChannel <- u
+}
+
+// 广播消息
+func (b *broadcaster) Broadcast(msg *Message) {
+	if len(b.messageChannel) >= global.MessageQueueLen {
+		log.Println("broadcast queue 满了")
+	}
+	b.messageChannel <- msg
 }
 
 func (b *broadcaster) UserLeaving(u *User) {

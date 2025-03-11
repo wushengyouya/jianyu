@@ -36,6 +36,34 @@ func WebSocketHandleFunc(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	userHasToken:=
+	userHasToken := logic.NewUser(conn, token, nickname, req.RemoteAddr)
+
+	// 2.开启给用户发送消息的goroutine
+	go userHasToken.SendMessage(req.Context())
+
+	// 3.给当前用户发送欢迎信息
+	userHasToken.MessageChannel <- logic.NewWelcomeMessage(userHasToken)
+
+	// 避免token泄漏
+	tmpUser := *userHasToken
+	user := &tmpUser
+	user.Token = ""
+
+	// 给所有用户告知新用户的到来
+	msg := logic.NewUserEnterMessage(user)
+	logic.Broadcaster.Broadcast(msg)
+
+	// 4.将该用户加入广播器的用户列表中
+	logic.Broadcaster.UserEntering(user)
+	log.Println("user: ", nickname, "joins chat")
+
+	// 5.接收用户发送来的消息
+	err = user.ReceiverMessage(req.Context())
+
+	// 6.用户离开
+	logic.Broadcaster.UserLeaving(user)
+	msg = logic.NewUserLeaveMessage(user)
+	logic.Broadcaster.Broadcast(msg)
+	log.Println("user: ", nickname, "leaves chat")
 
 }
