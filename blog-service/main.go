@@ -153,6 +153,7 @@ func setupLogger() error {
 	return nil
 }
 
+// 端口，启动模式，配置文件初始化
 func setupFlag() error {
 	flag.StringVar(&port, "port", "", "启动端口")
 	flag.StringVar(&runMode, "mode", "", "启动模式")

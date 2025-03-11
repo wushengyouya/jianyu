@@ -4,6 +4,7 @@ import (
 	"strconv"
 )
 
+// 给string 取别名 StrTo
 type StrTo string
 
 func (s StrTo) String() string {
