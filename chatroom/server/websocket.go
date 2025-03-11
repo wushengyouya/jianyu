@@ -36,4 +36,6 @@ func WebSocketHandleFunc(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	userHasToken:=
+
 }
