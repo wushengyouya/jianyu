@@ -24,6 +24,7 @@ type broadcaster struct {
 	usersChannel        chan []*User
 }
 
+// 饿汉式，包级变量，单例模式
 var Broadcaster = &broadcaster{
 	users:           make(map[string]*User),
 	enteringChannel: make(chan *User),
@@ -45,6 +46,7 @@ func (b *broadcaster) Start() {
 		case user := <-b.enteringChannel:
 			// 新用户进入
 			b.users[user.NickName] = user
+			OfflineProcessor.Send(user)
 		case user := <-b.leavingChannel:
 			// 用户离开
 			delete(b.users, user.NickName)
@@ -57,6 +59,7 @@ func (b *broadcaster) Start() {
 				}
 				user.MessageChannel <- msg
 			}
+			OfflineProcessor.Save(msg)
 		case nickname := <-b.checkUserChannel:
 			if _, ok := b.users[nickname]; ok {
 				b.checkUserCanInChannel <- false
@@ -98,9 +101,3 @@ func (b *broadcaster) GetUserList() []*User {
 	b.requestUsersChannel <- struct{}{}
 	return <-b.usersChannel
 }
-
-// func (b *broadcaster) Broadcast(msg *Message) {
-// 	if len(b.messageChannel)>= {
-
-// 	}
-// }

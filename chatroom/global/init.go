@@ -1,6 +1,7 @@
 package global
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"sync"
@@ -11,14 +12,15 @@ var once = new(sync.Once)
 
 func init() {
 	once.Do(func() {
+		InferRootDir()
 		initConfig()
-		inferRootDir()
 	})
 }
 
 // inferRootDir 推断出项目根目录
-func inferRootDir() {
+func InferRootDir() {
 	cwd, err := os.Getwd()
+	log.Println(cwd)
 	if err != nil {
 		panic(err)
 	}
@@ -32,6 +34,7 @@ func inferRootDir() {
 		return infer(filepath.Dir(d))
 	}
 	RootDir = infer(cwd)
+	log.Println(RootDir)
 }
 
 func exists(filename string) bool {
