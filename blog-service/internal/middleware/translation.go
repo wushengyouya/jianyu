@@ -12,6 +12,8 @@ import (
 	zh_translations "github.com/go-playground/validator/v10/translations/zh"
 )
 
+// TODO:此处不应为中间件初始化
+// Translations  错误翻译器
 func Translations() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		uni := ut.New(en.New(), zh.New(), zh_Hant_TW.New())

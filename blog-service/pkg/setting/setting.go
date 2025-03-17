@@ -7,10 +7,12 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Setting 提供加载配置文件，监控配置文件
 type Setting struct {
 	vp *viper.Viper
 }
 
+// NewSetting 创建Setting结构体。configs参数是多个配置文件路径
 func NewSetting(configs ...string) (*Setting, error) {
 	vp := viper.New()
 	vp.SetConfigName("config")
@@ -31,6 +33,7 @@ func NewSetting(configs ...string) (*Setting, error) {
 	return s, nil
 }
 
+// WatchSettingChange 监控配置文件变化，发生改变则重新加载配置文件
 func (s *Setting) WatchSettingChange() {
 	go func() {
 		s.vp.WatchConfig()

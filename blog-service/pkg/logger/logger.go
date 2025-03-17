@@ -94,7 +94,7 @@ func (l *Logger) WithCaller(skip int) *Logger {
 	return ll
 }
 
-// 设置当前整个调用栈信息
+// WithCallersFrames 设置当前整个调用栈信息
 func (l *Logger) WithCallersFrames() *Logger {
 	maxCallerDepth := 25
 	minCallerDepth := 1

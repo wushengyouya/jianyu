@@ -23,7 +23,7 @@ func (w AccessLogWriter) Write(p []byte) (int, error) {
 	return w.ResponseWriter.Write(p)
 }
 
-// 访问日志中间件
+// AccessLog 访问日志中间件
 func AccessLog() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		bodyWriter := &AccessLogWriter{body: bytes.NewBufferString(""), ResponseWriter: ctx.Writer}

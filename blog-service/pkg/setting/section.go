@@ -67,7 +67,7 @@ func (s *Setting) ReadSection(k string, v any) error {
 	return nil
 }
 
-// 热加载配置文件
+// ReloadAllSection 热加载配置文件
 func (s *Setting) ReloadAllSection() error {
 	for k, v := range sections {
 		err := s.ReadSection(k, v)

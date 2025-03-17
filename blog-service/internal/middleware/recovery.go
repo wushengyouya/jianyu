@@ -11,7 +11,7 @@ import (
 	"github.com/wushengyouya/blog-service/pkg/errcode"
 )
 
-// 自定义recovery，全局异常处理
+// Recovery 自定义recovery，全局异常处理
 func Recovery() gin.HandlerFunc {
 	defaultMailer := email.NewEmail(&email.SMTPInfo{
 		Host:     global.EmailSetting.Host,

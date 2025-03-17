@@ -6,7 +6,7 @@ import (
 	"github.com/wushengyouya/blog-service/pkg/errcode"
 )
 
-// 解析token中间件
+// JWT认证中间件
 func JWT() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var (
@@ -18,6 +18,7 @@ func JWT() gin.HandlerFunc {
 		} else {
 			token = ctx.GetHeader("token")
 		}
+
 		if token == "" {
 			ecode = errcode.InvalidParams
 		} else {

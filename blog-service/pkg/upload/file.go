@@ -90,8 +90,7 @@ func CreateSavePath(dst string, perm os.FileMode) error {
 	return nil
 }
 
-// 保存文件
-
+// SaveFile 保存文件
 func SaveFile(file *multipart.FileHeader, dst string) error {
 	src, err := file.Open()
 	if err != nil {
