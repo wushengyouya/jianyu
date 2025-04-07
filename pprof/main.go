@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	_ "net/http/pprof"
+	_ "net/http/pprof" // 监听pprof,必须要引入
 	"runtime"
 	"sync"
 	"time"

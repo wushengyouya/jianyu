@@ -56,7 +56,7 @@ func main() {
 		Handler:        engine,
 		ReadTimeout:    global.ServerSetting.ReadTimeout,
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
-		MaxHeaderBytes: 1 << 20,
+		MaxHeaderBytes: 1 << 20, // 1MB   1<<10 1KB   8 << 20 8MB
 	}
 	global.Logger.Infof("%s: go-programming-tour-book/%s", "eddycjy", "blog-service")
 
